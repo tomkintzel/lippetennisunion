@@ -1,0 +1,58 @@
+version: '3.9'
+
+services:
+  strapiDB-dev:
+    image: mysql:8.0
+    container_name: strapiDB-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: strapi
+      MYSQL_PASSWORD: ltu
+      MYSQL_ROOT_PASSWORD: ltu
+      MYSQL_DATABASE: strapi
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - strapi-data-dev:/var/lib/mysql
+    networks:
+      - dev-network
+
+  backend-dev:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: strapi-dev
+    env_file: ./backend/.env.dev
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./backend/src:/opt/app/src
+      - ./backend/public/uploads:/opt/app/public/uploads
+      - ./backend/config:/opt/app/config
+    depends_on:
+      - strapiDB-dev
+    networks:
+      - dev-network
+
+  frontend-dev:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: nuxt-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      HOST: 0.0.0.0
+    depends_on:
+      - backend-dev
+    networks:
+      - dev-network
+
+volumes:
+  strapi-data-dev:
+
+networks:
+  dev-network:
+    driver: bridge

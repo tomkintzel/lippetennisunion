@@ -33,7 +33,7 @@ jobs:
           CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
           TAG=$([[ "$CURRENT_BRANCH" == "production" ]] && echo "latest" || echo "$CURRENT_BRANCH")
 
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/ps-next-fb
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/ltu-frontend
           GITHUB_REF_IMAGE=${IMAGE_NAME}:${GITHUB_SHA}
           GITHUB_BRANCH_IMAGE=${IMAGE_NAME}:${TAG}
 
@@ -69,7 +69,7 @@ jobs:
           CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
           TAG=$([[ "$CURRENT_BRANCH" == "production" ]] && echo "latest" || echo "$CURRENT_BRANCH")
 
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/ps-next-strapi
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/ltu-backend
           GITHUB_REF_IMAGE=${IMAGE_NAME}:${GITHUB_SHA}
           GITHUB_BRANCH_IMAGE=${IMAGE_NAME}:${TAG}
 

@@ -11,8 +11,13 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
+    },
+    "hero": {
+      "type": "component",
+      "component": "blocks.hero",
+      "repeatable": false
     }
   }
 }

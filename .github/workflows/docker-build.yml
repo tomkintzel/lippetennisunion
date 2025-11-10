@@ -1,0 +1,81 @@
+name: Build & Push Docker Images (Frontend + Backend)
+
+on:
+  push:
+    branches:
+      - "**"             # alle Branches
+      - "!dependabot/**" # dependabot ausschließen
+  workflow_dispatch:      # manuell ausführbar
+
+jobs:
+  # =====================================================
+  # 🧩 FRONTEND BUILD (Nuxt 4)
+  # =====================================================
+  frontend:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.ref != 'refs/heads/dependabot/**' }}
+    name: Build & Push Frontend (Nuxt 4)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build and Push Docker Image (Frontend)
+        run: |
+          CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
+          TAG=$([[ "$CURRENT_BRANCH" == "production" ]] && echo "latest" || echo "$CURRENT_BRANCH")
+
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/ps-next-fb
+          GITHUB_REF_IMAGE=${IMAGE_NAME}:${GITHUB_SHA}
+          GITHUB_BRANCH_IMAGE=${IMAGE_NAME}:${TAG}
+
+          echo "📦 Building Frontend Image ($TAG)"
+          docker build -t $IMAGE_NAME -t $GITHUB_REF_IMAGE -t $GITHUB_BRANCH_IMAGE -f Dockerfile.prod .
+
+          echo "🚀 Pushing to GHCR"
+          docker push $GITHUB_REF_IMAGE
+          docker push $GITHUB_BRANCH_IMAGE
+
+  # =====================================================
+  # ⚙️ BACKEND BUILD (Strapi)
+  # =====================================================
+  backend:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.ref != 'refs/heads/dependabot/**' }}
+    name: Build & Push Backend (Strapi)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build and Push Docker Image (Backend)
+        run: |
+          CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
+          TAG=$([[ "$CURRENT_BRANCH" == "production" ]] && echo "latest" || echo "$CURRENT_BRANCH")
+
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/ps-next-strapi
+          GITHUB_REF_IMAGE=${IMAGE_NAME}:${GITHUB_SHA}
+          GITHUB_BRANCH_IMAGE=${IMAGE_NAME}:${TAG}
+
+          echo "📦 Building Backend Image ($TAG)"
+          docker build -t $IMAGE_NAME -t $GITHUB_REF_IMAGE -t $GITHUB_BRANCH_IMAGE -f Dockerfile.prod .
+
+          echo "🚀 Pushing to GHCR"
+          docker push $GITHUB_REF_IMAGE
+          docker push $GITHUB_BRANCH_IMAGE

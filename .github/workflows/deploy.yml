@@ -1,0 +1,39 @@
+name: 🚀 Deploy to Server (Docker Compose)
+
+on:
+  workflow_dispatch:        # manuell auslösbar
+  workflow_run:             # optional: automatisch nach erfolgreichem Build
+    workflows: ["Build & Push Docker Images (Frontend + Backend)"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    name: Deploy via SSH
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Connect and deploy on remote server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo "🛰️ Starte Deployment..."
+            cd /opt/pader-solartechnik/        # <-- dein Projektverzeichnis auf dem Server
+
+            echo "📦 Pull latest images from GHCR"
+            docker-compose -f docker-compose.deploy.yml pull
+
+            echo "🔄 Restarting containers"
+            docker-compose -f docker-compose.deploy.yml up -d
+
+            echo "🧹 Cleaning old images"
+            docker image prune -af
+
+            echo "✅ Deployment abgeschlossen!"

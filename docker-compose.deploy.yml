@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  frontend:
+    image: ghcr.io/tomkintzel/ltu-frontend:latest
+    restart: always
+    env_file:
+      - .env.deploy
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+      
+  backend:
+    image: ghcr.io/tomkintzel/ltu-backend:latest
+    restart: always
+    env_file:
+      - .env.deploy
+    ports:
+      - "1337:1337"
+    networks:
+      - app-network
+    # Optional: Persistente Daten lokal innerhalb des Containers
+    volumes:
+      - ./backend/uploads:/opt/app/public/uploads
+
+networks:
+  app-network:
+    driver: bridge

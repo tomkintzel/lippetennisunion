@@ -26,6 +26,7 @@ jobs:
           script: |
             echo "🛰️ Starte Deployment..."
             cd ${{ secrets.SSH_DEPLOY_PATH }}
+            echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
 
             echo "📦 Pull latest images from GHCR"
             docker-compose -f docker-compose.deploy.yml pull

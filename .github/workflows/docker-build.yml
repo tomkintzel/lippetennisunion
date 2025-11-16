@@ -43,6 +43,7 @@ jobs:
           echo "🚀 Pushing to GHCR"
           docker push $GITHUB_REF_IMAGE
           docker push $GITHUB_BRANCH_IMAGE
+          docker push $GITHUB_LATEST_IMAGE
 
   # =====================================================
   # ⚙️ BACKEND BUILD (Strapi)
@@ -79,3 +80,4 @@ jobs:
           echo "🚀 Pushing to GHCR"
           docker push $GITHUB_REF_IMAGE
           docker push $GITHUB_BRANCH_IMAGE
+          docker push $GITHUB_LATEST_IMAGE

@@ -25,7 +25,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             echo "🛰️ Starte Deployment..."
-            cd /opt/pader-solartechnik/        # <-- dein Projektverzeichnis auf dem Server
+            cd ${{ secrets.SSH_DEPLOY_PATH }}
 
             echo "📦 Pull latest images from GHCR"
             docker-compose -f docker-compose.deploy.yml pull

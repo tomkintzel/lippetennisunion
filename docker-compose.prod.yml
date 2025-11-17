@@ -36,6 +36,9 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
     container_name: nuxt
+    args:
+      - NUXT_PUBLIC_API_URL=https://api.lippetennisunion.site
+      - STRAPI_URL=https://api.lippetennisunion.site
     environment:
       - STRAPI_URL=https://api.lippetennisunion.site
       - NUXT_PUBLIC_API_URL=https://api.lippetennisunion.site

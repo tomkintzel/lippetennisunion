@@ -4,7 +4,7 @@
         <section class="w-full h-[70vh] flex items-center justify-center bg-cover bg-center bg-no-repeat px-6"
             style="background-image: url('/img/hero-tennis.jpg');">
             <div class="bg-white/80 p-8 rounded-2xl max-w-xl text-center shadow-lg">
-                <h2 class="text-4xl font-extrabold mb-4">Gemeinsam aufschlagen</h2>
+                <h2 class="text-4xl font-extrabold mb-4">{{ homepage?.hero?.title }}</h2>
                 <p class="text-lg mb-6">Tennis mit Leidenschaft in Lippe. Werde Teil unserer Community.</p>
                 <NuxtLink to="/contact"
                     class="px-6 py-3 rounded-xl font-semibold bg-ltu-blue text-white hover:bg-ltu-yellow transition">
@@ -60,7 +60,8 @@
 </template>
 
 <script setup>
-// No logic needed yet
+// fetch data from strapi backend homepage site
+const { data: homepage } = useStrapi().find('homepage', { 'populate': '*' });
 </script>
 
 <style>

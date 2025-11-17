@@ -38,6 +38,7 @@ services:
     container_name: nuxt
     environment:
       - STRAPI_URL=https://api.lippetennisunion.site
+      - NUXT_PUBLIC_API_URL=https://api.lippetennisunion.site
     ports:
       - "3000:3000"
     depends_on:

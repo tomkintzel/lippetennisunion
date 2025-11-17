@@ -38,6 +38,9 @@ services:
     image: ghcr.io/tomkintzel/ltu-frontend:main
     restart: always
     env_file: .env.frontend
+    environment:
+      - STRAPI_URL=https://api.lippetennisunion.site
+      - NUXT_PUBLIC_API_URL=https://api.lippetennisunion.site
     depends_on:
       - backend
     ports:

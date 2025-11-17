@@ -12,5 +12,8 @@ WORKDIR /app
 
 COPY --from=builder /app/.output /app/.output
 
+ENV STRAPI_URL=https://api.lippetennisunion.site
+ENV NUXT_PUBLIC_API_URL=https://api.lippetennisunion.site
+
 EXPOSE 3000
 CMD ["node", ".output/server/index.mjs"]

@@ -1,28 +1,53 @@
 version: '3.9'
 
 services:
+  strapiDB:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: strapi
+      MYSQL_USER: strapi
+      MYSQL_PASSWORD: ltu
+      MYSQL_ROOT_PASSWORD: ltu
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    image: ghcr.io/tomkintzel/ltu-backend:main
+    restart: always
+    env_file: .env.deploy
+    depends_on:
+      strapiDB:
+        condition: service_healthy
+    ports:
+      - "1337:1337"
+    volumes:
+      - backend-uploads:/opt/app/public/uploads
+    networks:
+      - app-network
+
   frontend:
     image: ghcr.io/tomkintzel/ltu-frontend:main
     restart: always
-    env_file:
-      - .env.deploy
+    env_file: .env.deploy
+    depends_on:
+      - backend
     ports:
       - "3000:3000"
     networks:
       - app-network
-      
-  backend:
-    image: ghcr.io/tomkintzel/ltu-backend:main
-    restart: always
-    env_file:
-      - .env.deploy
-    ports:
-      - "1337:1337"
-    networks:
-      - app-network
-    # Optional: Persistente Daten lokal innerhalb des Containers
-    volumes:
-      - ./backend/uploads:/opt/app/public/uploads
+
+volumes:
+  db-data:
+  backend-uploads:
 
 networks:
   app-network:

@@ -59,11 +59,9 @@
 <script setup>
 import { ref } from 'vue'
 import { Menu } from 'lucide-vue-next'
-
-const { find } = useStrapi();
 // setting
-
-const {data: settings } = await useStrapi().find('setting', { 'pLevel': '6' });
+const {data: settings } = await useStrapi().find('setting');
+console.log('Settings:', settings);
 
 
 

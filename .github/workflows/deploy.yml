@@ -29,10 +29,10 @@ jobs:
             echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
 
             echo "📦 Pull latest images from GHCR"
-            docker-compose -f docker-compose.deploy.yml pull
+            docker compose -f docker-compose.deploy.yml pull
 
             echo "🔄 Restarting containers"
-            docker-compose -f docker-compose.deploy.yml up -d
+            docker compose -f docker-compose.deploy.yml up -d
 
             echo "🧹 Cleaning old images"
             docker image prune -af

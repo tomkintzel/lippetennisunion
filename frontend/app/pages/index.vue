@@ -1,14 +1,15 @@
 <template>
     <div class="w-full">
         <!-- Hero Section -->
+         <!-- add strapi url to style background image -->
         <section class="w-full h-[70vh] flex items-center justify-center bg-cover bg-center bg-no-repeat px-6"
-            style="background-image: url('/img/hero-tennis.jpg');">
+            :style="{ backgroundImage: `url(${imageUrl})` }">
             <div class="bg-white/80 p-8 rounded-2xl max-w-xl text-center shadow-lg">
                 <h2 class="text-4xl font-extrabold mb-4">{{ homepage?.hero?.title }}</h2>
-                <p class="text-lg mb-6">Tennis mit Leidenschaft in Lippe. Werde Teil unserer Community.</p>
-                <NuxtLink to="/contact"
+                <p class="text-lg mb-6">{{ homepage?.hero?.subtitle }}</p>
+                <NuxtLink :to="homepage?.hero?.button?.link"
                     class="px-6 py-3 rounded-xl font-semibold bg-ltu-blue text-white hover:bg-ltu-yellow transition">
-                    Jetzt Mitglied werden
+                    {{ homepage?.hero?.button?.text }}
                 </NuxtLink>
             </div>
         </section>
@@ -61,7 +62,8 @@
 
 <script setup>
 // fetch data from strapi backend homepage site
-const { data: homepage } = await useStrapi().find('homepage', { 'populate': '*' });
+const { data: homepage } = await useStrapi().find('homepage', { 'pLevel': '6' });
+const imageUrl = computed(() => useStrapiMedia(homepage.hero?.image?.url || ''));
 </script>
 
 <style>

@@ -48,9 +48,9 @@
 
         <!-- Footer -->
         <footer class="w-full text-center py-8 border-t border-gray-200 text-sm">
-            <p class="font-semibold">Lippe Tennis Union</p>
-            <p class="text-gray-600">info@lippe-tennis-union.de</p>
-            <p class="text-gray-500 mt-2">© 2025 Lippe Tennis Union</p>
+            <p class="font-semibold">{{ settings?.name }}</p>
+            <p class="text-gray-600">{{ settings?.email }}</p>
+            <p class="text-gray-500 mt-2">© {{ currentYear }} Lippe Tennis Union</p>
         </footer>
     </div>
 </template>
@@ -59,7 +59,18 @@
 <script setup>
 import { ref } from 'vue'
 import { Menu } from 'lucide-vue-next'
+
+const { find } = useStrapi();
+// setting
+
+const {data: settings } = await useStrapi().find('setting', { 'pLevel': '6' });
+
+
+
+
 const mobileOpen = ref(false)
+// current year for footer
+const currentYear = new Date().getFullYear()
 
 </script>
 

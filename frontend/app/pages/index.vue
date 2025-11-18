@@ -61,7 +61,7 @@
 
 <script setup>
 // fetch data from strapi backend homepage site
-const { data: homepage } = useStrapi().find('homepage', { 'populate': '*' });
+const { data: homepage } = await useStrapi().find('homepage', { 'populate': '*' });
 </script>
 
 <style>

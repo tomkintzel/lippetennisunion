@@ -5,6 +5,14 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . .
+
+# Ensure build gets correct API URL; can be overridden via build args
+ARG STRAPI_URL=https://api.lippetennisunion.site
+ARG NUXT_PUBLIC_API_URL=https://api.lippetennisunion.site
+ARG NUXT_PUBLIC_STRAPI_URL=${NUXT_PUBLIC_API_URL}
+ENV STRAPI_URL=${STRAPI_URL}
+ENV NUXT_PUBLIC_API_URL=${NUXT_PUBLIC_API_URL}
+ENV NUXT_PUBLIC_STRAPI_URL=${NUXT_PUBLIC_STRAPI_URL}
 RUN npm run build
 
 FROM node:22-alpine
@@ -12,8 +20,12 @@ WORKDIR /app
 
 COPY --from=builder /app/.output /app/.output
 
-ENV STRAPI_URL=https://api.lippetennisunion.site
-ENV NUXT_PUBLIC_API_URL=https://api.lippetennisunion.site
+ARG STRAPI_URL=https://api.lippetennisunion.site
+ARG NUXT_PUBLIC_API_URL=https://api.lippetennisunion.site
+ARG NUXT_PUBLIC_STRAPI_URL=${NUXT_PUBLIC_API_URL}
+ENV STRAPI_URL=${STRAPI_URL}
+ENV NUXT_PUBLIC_API_URL=${NUXT_PUBLIC_API_URL}
+ENV NUXT_PUBLIC_STRAPI_URL=${NUXT_PUBLIC_STRAPI_URL}
 
 EXPOSE 3000
 CMD ["node", ".output/server/index.mjs"]

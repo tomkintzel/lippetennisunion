@@ -1,18 +1,26 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const defaultStrapiUrl =
+  process.env.NUXT_PUBLIC_STRAPI_URL ||
+  process.env.NUXT_PUBLIC_API_URL ||
+  process.env.STRAPI_URL ||
+  'http://localhost:1337'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxtjs/strapi', '@nuxtjs/tailwindcss', '@nuxtjs/seo'],
   strapi: {
-    url: process.env.STRAPI_URL || 'http://localhost:1337',
+    // Used by @nuxtjs/strapi; can still be overridden at runtime via NUXT_PUBLIC_STRAPI__URL / NUXT_STRAPI__URL
+    url: defaultStrapiUrl,
     version: 'v5',
     prefix: '/api'
   },
   runtimeConfig: {
+    // Values can be overridden at runtime via env vars, e.g. NUXT_PUBLIC_STRAPI_URL / STRAPI_URL
     public: {
-      strapiUrl: process.env.STRAPI_URL || 'http://localhost:1337'
+      strapiUrl: defaultStrapiUrl
     },
-    strapiUrl: process.env.STRAPI_URL || 'http://localhost:1337'
+    strapiUrl: defaultStrapiUrl
   },
   app: {
     head: {

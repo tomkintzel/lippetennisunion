@@ -23,6 +23,11 @@
       "type": "component",
       "component": "blocks.text",
       "repeatable": false
+    },
+    "eventssection": {
+      "type": "component",
+      "component": "blocks.events",
+      "repeatable": false
     }
   }
 }

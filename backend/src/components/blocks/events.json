@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_blocks_events",
+  "info": {
+    "displayName": "events"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::event.event"
+    }
+  },
+  "config": {}
+}

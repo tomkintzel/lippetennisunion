@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxtjs/strapi', '@nuxtjs/tailwindcss', '@nuxtjs/seo'],
+  css: ['@/assets/css/main.css'],
   strapi: {
     // Used by @nuxtjs/strapi; can still be overridden at runtime via NUXT_PUBLIC_STRAPI__URL / NUXT_STRAPI__URL
     url: defaultStrapiUrl,

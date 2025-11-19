@@ -18,6 +18,11 @@
       "type": "component",
       "component": "blocks.hero",
       "repeatable": false
+    },
+    "about": {
+      "type": "component",
+      "component": "blocks.text",
+      "repeatable": false
     }
   }
 }

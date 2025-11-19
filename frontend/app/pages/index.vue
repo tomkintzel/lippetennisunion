@@ -13,15 +13,12 @@
                 </NuxtLink>
             </div>
         </section>
+        <Textsection
+            :title="homepage?.about?.title"
+            :text="homepage?.about?.text"
+        />
 
-        <!-- About Section -->
-        <section class="px-6 py-16 max-w-4xl mx-auto text-center">
-            <h3 class="text-3xl font-bold mb-4">Über den Verein</h3>
-            <p class="text-lg text-gray-700">
-                Die Lippe Tennis Union steht für Leidenschaft, Teamgeist und sportliche
-                Entwicklung. Vom Nachwuchs bis zu den Senioren – bei uns findet jeder seinen Platz.
-            </p>
-        </section>
+
 
         <!-- Events Section -->
         <section class="px-6 py-16 bg-gray-100">

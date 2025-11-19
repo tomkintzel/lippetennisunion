@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_blocks_texts",
+  "info": {
+    "displayName": "textsection"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

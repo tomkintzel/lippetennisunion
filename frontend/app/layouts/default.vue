@@ -9,7 +9,7 @@
             <!-- Desktop Nav -->
             <nav class="hidden md:flex space-x-6 font-medium">
                 <NuxtLink to="/" class="hover:text-ltu-yellow hover:cursor-pointer">Start</NuxtLink>
-                <NuxtLink to="https://tennishalle-pivitsheide.de" class="hover:text-ltu-yellow hover:cursor-pointer">Hallenbuchung</NuxtLink>
+                <NuxtLink to="https://pivitsheide.tennisplatz.info/reservierung" class="hover:text-ltu-yellow hover:cursor-pointer">Hallenbuchung</NuxtLink>
                 <NuxtLink to="/events" class="hover:text-ltu-yellow hover:cursor-pointer">Events</NuxtLink>
                 <NuxtLink to="/about" class="hover:text-ltu-yellow hover:cursor-pointer">Über uns</NuxtLink>
                 <NuxtLink to="/contact" class="hover:text-ltu-yellow hover:cursor-pointer">Kontakt</NuxtLink>

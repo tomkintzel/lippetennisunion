@@ -27,7 +27,7 @@
             <nav v-if="mobileOpen"
                 class="md:hidden border-b border-gray-200 px-6 py-4 flex flex-col space-y-4 font-medium bg-white">
                 <NuxtLink to="/" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Start</NuxtLink>
-                <NuxtLink to="https://tennishalle-pivitsheide.de" @click="mobileOpen = false"
+                <NuxtLink to="https://pivitsheide.tennisplatz.info/reservierung" @click="mobileOpen = false"
                     class="hover:text-ltu-instagramPink">Hallenbuchung
                 </NuxtLink>
                 <NuxtLink to="/events" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Events

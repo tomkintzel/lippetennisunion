@@ -19,6 +19,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Values can be overridden at runtime via env vars, e.g. NUXT_PUBLIC_STRAPI_URL / STRAPI_URL
     public: {
+      strapi: {
+        url: defaultStrapiUrl
+      },
       strapiUrl: defaultStrapiUrl
     },
     strapiUrl: defaultStrapiUrl

@@ -18,26 +18,31 @@
             :text="homepage?.about?.text"
         />
 
-
+        
 
         <!-- Events Section -->
         <section class="px-6 py-16 bg-gray-100">
             <div class="max-w-6xl mx-auto">
-                <h3 class="text-3xl font-bold text-center mb-12">Bevorstehende Events</h3>
+                <h3 class="text-3xl font-bold text-center mb-12">{{ homepage?.eventssection?.title }}</h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="p-6 bg-white shadow rounded-2xl">
+                    <Eventitem
+                        v-for="event in homepage?.eventssection?.events"
+                        :key="event.id"
+                        :event="event"
+                    />
+                    <!-- <a  class="p-6 bg-white shadow rounded-2xl">
                         <h4 class="text-xl font-bold mb-2">Sommerturnier 2025</h4>
                         <p class="text-sm text-gray-600">15. Juni 2025</p>
-                    </div>
-                    <div class="p-6 bg-white shadow rounded-2xl">
+                    </a>
+                    <a class="p-6 bg-white shadow rounded-2xl">
                         <h4 class="text-xl font-bold mb-2">Kids Camp</h4>
                         <p class="text-sm text-gray-600">10.–14. Juli 2025</p>
-                    </div>
+                    </a>
                     <div class="p-6 bg-white shadow rounded-2xl">
                         <h4 class="text-xl font-bold mb-2">Mixed Doppel Cup</h4>
                         <p class="text-sm text-gray-600">August 2025</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
@@ -61,6 +66,10 @@
 // fetch data from strapi backend homepage site
 const { data: homepage } = await useStrapi().find('homepage', { 'pLevel': '6' });
 const imageUrl = computed(() => useStrapiMedia(homepage.hero?.image?.url || ''));
+console.log('Homepage data:', homepage?.eventssection?.events);
+// console log strapi url from runtime config
+const config = useRuntimeConfig();
+console.log('Strapi URL:', config.public.strapiUrl);
 </script>
 
 <style>

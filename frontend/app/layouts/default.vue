@@ -49,6 +49,10 @@
         <footer class="w-full text-center py-8 border-t border-gray-200 text-sm">
             <p class="font-semibold">{{ settings?.name }}</p>
             <p class="text-gray-600">{{ settings?.email }}</p>
+            <div class="mt-4 space-x-4">
+                <NuxtLink to="/impressum" class="text-ltu-blue hover:underline">Impressum</NuxtLink>
+                <NuxtLink to="/datenschutz" class="text-ltu-blue hover:underline">Datenschutz</NuxtLink>
+            </div>
             <p class="text-gray-500 mt-2">© {{ currentYear }} Lippe Tennis Union</p>
         </footer>
     </div>

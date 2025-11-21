@@ -16,8 +16,8 @@ const { data: item } = await useAsyncData(
     `resource-${id}`,
     async () => {
         try {
-            const res = await $fetch(`${STRAPI_URL}/api/events/${id}`, {
-                query: { populate: "*" }
+            const res = await $fetch(`${STRAPI_URL}/api/events/${id}?pLevel=6`, {
+                query: { pLevel: '6' }
             });
 
             return res?.data;
@@ -40,9 +40,11 @@ const { data: item } = await useAsyncData(
         }
     }
 );
+console.log('Event page data:', item);
 const heroImage = computed(() =>
     useStrapiMedia(item?.image?.url || '')
 );
+console.log('Event page image URL:', item?.image?.url);
 const formatEU = (date) => {
   return new Date(date).toLocaleString("de-DE", {
     timeZone: "Europe/Berlin",
@@ -60,7 +62,7 @@ const formatEU = (date) => {
     <div class="w-full">
         <section
             class="w-full h-72 md:h-96 flex items-center justify-center bg-cover bg-center bg-no-repeat px-6"
-            :style="item?.image?.url ? `background-image:url(${heroImage})` : ''"
+            :style="item?.image?.url ? `background-image:url(${useStrapiMedia(item?.image?.url)})` : ''"
         >
             <div class="bg-black/60 text-white p-8 rounded-2xl max-w-2xl text-center">
                 <h1 class="text-4xl font-bold mb-4">{{ item?.title }}</h1>
@@ -87,9 +89,9 @@ const formatEU = (date) => {
                         <p class="text-gray-700">{{ formatEU(item?.enddate) }}</p>
                     </div>
                 </div>
-                <div v-if="item?.image" class="rounded-2xl overflow-hidden shadow">
+                <div v-if="item?.poster" class="rounded-2xl overflow-hidden shadow">
                     <img
-                        :src="heroImage"
+                        :src="useStrapiMedia(item?.poster?.url)"
                         :alt="item?.title"
                         class="w-full h-full object-cover"
                     />

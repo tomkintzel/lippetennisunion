@@ -66,10 +66,6 @@
 // fetch data from strapi backend homepage site
 const { data: homepage } = await useStrapi().find('homepage', { 'pLevel': '6' });
 const imageUrl = computed(() => useStrapiMedia(homepage.hero?.image?.url || ''));
-console.log('Homepage data:', homepage?.eventssection?.events);
-// console log strapi url from runtime config
-const config = useRuntimeConfig();
-console.log('Strapi URL:', config.public.strapiUrl);
 </script>
 
 <style>

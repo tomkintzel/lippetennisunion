@@ -27,6 +27,7 @@ const formatEU = (date) => {
         class="p-6 bg-white shadow rounded-2xl"
         :aria-disabled="!event?.id"
     >
+        <img :src="useStrapiMedia(event?.poster?.url)" :alt="event.title" class="mb-4 rounded-lg w-full h-48 object-cover" v-if="event?.poster?.url" />
         <h4 class="text-xl font-bold mb-2">{{ event.title }}</h4>
         <p class="text-sm text-gray-600">{{ formatEU(event.startdate) }}</p>
     </NuxtLink>

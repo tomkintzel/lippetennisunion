@@ -49,13 +49,18 @@
         <!-- Partners Section -->
         <section id="partners" class="px-6 py-16 bg-white">
             <div class="max-w-4xl mx-auto text-center">
-                <h3 class="text-3xl font-bold mb-4">Partner & Sponsoren</h3>
-                <p class="text-lg text-gray-700 mb-8">Wir sind stolz auf unsere Partnerschaften, insbesondere mit der ASICS Tennis Academy.</p>
+                <h3 class="text-3xl font-bold mb-4">{{homepage?.partners?.title}}</h3>
+                <p class="text-lg text-gray-700 mb-8">{{homepage?.partners?.text}}</p>
             </div>
             <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <div class="flex items-center justify-center h-24 bg-slate-50 rounded-2xl shadow transition hover:shadow-lg text-xl font-semibold text-gray-800">ASICS</div>
+                <Partneritem
+                    v-for="partner in homepage?.partners?.partners"
+                    :key="partner.id"
+                    :partner="partner"
+                />
+                <!-- <div class="flex items-center justify-center h-24 bg-slate-50 rounded-2xl shadow transition hover:shadow-lg text-xl font-semibold text-gray-800">ASICS</div>
                 <div class="flex items-center justify-center h-24 bg-slate-50 rounded-2xl shadow transition hover:shadow-lg text-xl font-semibold text-gray-800">Wilson</div>
-                <div class="flex items-center justify-center h-24 bg-slate-50 rounded-2xl shadow transition hover:shadow-lg text-xl font-semibold text-gray-800">Tennis Point</div>
+                <div class="flex items-center justify-center h-24 bg-slate-50 rounded-2xl shadow transition hover:shadow-lg text-xl font-semibold text-gray-800">Tennis Point</div> -->
                 <!-- <div class="flex items-center justify-center h-24 bg-slate-50 rounded-2xl shadow transition hover:shadow-lg text-xl font-semibold text-gray-800">Local Sponsor</div> -->
             </div>
         </section>
@@ -66,6 +71,7 @@
 // fetch data from strapi backend homepage site
 const { data: homepage } = await useStrapi().find('homepage', { 'pLevel': '6' });
 const imageUrl = computed(() => useStrapiMedia(homepage.hero?.image?.url || ''));
+console.log('Homepage data:', homepage);
 </script>
 
 <style>

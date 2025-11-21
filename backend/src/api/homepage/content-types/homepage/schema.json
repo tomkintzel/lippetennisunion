@@ -28,6 +28,11 @@
       "type": "component",
       "component": "blocks.events",
       "repeatable": false
+    },
+    "partners": {
+      "type": "component",
+      "component": "blocks.partners",
+      "repeatable": false
     }
   }
 }

@@ -10,6 +10,7 @@
             <nav class="hidden md:flex space-x-6 font-medium">
                 <NuxtLink to="/" class="hover:text-ltu-yellow hover:cursor-pointer">Start</NuxtLink>
                 <NuxtLink to="https://pivitsheide.tennisplatz.info/reservierung" class="hover:text-ltu-yellow hover:cursor-pointer">Hallenbuchung</NuxtLink>
+                <NuxtLink to="/news" class="hover:text-ltu-yellow hover:cursor-pointer">News</NuxtLink>
                 <NuxtLink to="/events" class="hover:text-ltu-yellow hover:cursor-pointer">Events</NuxtLink>
                 <NuxtLink to="/about" class="hover:text-ltu-yellow hover:cursor-pointer">Über uns</NuxtLink>
                 <NuxtLink to="/contact" class="hover:text-ltu-yellow hover:cursor-pointer">Kontakt</NuxtLink>
@@ -30,12 +31,10 @@
                 <NuxtLink to="https://pivitsheide.tennisplatz.info/reservierung" @click="mobileOpen = false"
                     class="hover:text-ltu-instagramPink">Hallenbuchung
                 </NuxtLink>
-                <NuxtLink to="/events" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Events
-                </NuxtLink>
-                <NuxtLink to="/about" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Über uns
-                </NuxtLink>
-                <NuxtLink to="/contact" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Kontakt
-                </NuxtLink>
+                <NuxtLink to="/news" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">News</NuxtLink>
+                <NuxtLink to="/events" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Events</NuxtLink>
+                <NuxtLink to="/about" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Über uns</NuxtLink>
+                <NuxtLink to="/contact" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Kontakt</NuxtLink>
             </nav>
         </transition>
 
@@ -61,10 +60,6 @@ import { ref } from 'vue'
 import { Menu } from 'lucide-vue-next'
 // setting
 const {data: settings } = await useStrapi().find('setting');
-console.log('Settings:', settings);
-
-
-
 
 const mobileOpen = ref(false)
 // current year for footer

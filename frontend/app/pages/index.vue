@@ -21,7 +21,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8" v-if="homepage?.eventssection?.events">
                     <Eventitem v-for="event in homepage?.eventssection?.events" :key="event.id" :event="event" />
                 </div>
-                <div class="grid grid-cols-1">
+                <div class="grid grid-cols-1 max-w-xl place-items-center" v-else>
                     <div class="bg-white shadow rounded-2xl p-6 mt-8 text-center">
                         <p>Zur Zeit keine Events geplant</p>
                     </div>
@@ -38,7 +38,7 @@
                 v-if="homepage?.partners?.partners">
                 <Partneritem v-for="partner in homepage?.partners?.partners" :key="partner.id" :partner="partner" />
             </div>
-            <div class="max-w-6xl mx-auto grid-cols-1">
+            <div class="max-w-xl mx-auto grid-cols-1 place-items-center" v-else>
                 <div
                     class="flex flex-col items-center justify-center bg-slate-50 rounded-2xl shadow transition hover:shadow-lg p-8">
                     <span class="text-xl font-semibold text-gray-800">

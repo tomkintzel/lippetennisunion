@@ -18,7 +18,7 @@
         <section class="px-6 py-16 bg-gray-100">
             <div class="max-w-6xl mx-auto">
                 <h3 class="text-3xl font-bold text-center mb-12">{{ homepage?.eventssection?.title }}</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" v-if="homepage?.eventssection?.events">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" v-if="homepage?.eventssection?.events.length > 0">
                     <Eventitem v-for="event in homepage?.eventssection?.events" :key="event.id" :event="event" />
                 </div>
                 <div class="grid grid-cols-1 max-w-xl place-items-center" v-else>
@@ -35,7 +35,7 @@
                 <p class="text-lg text-gray-700 mb-8">{{ homepage?.partners?.text }}</p>
             </div>
             <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
-                v-if="homepage?.partners?.partners">
+                v-if="homepage?.partners?.partners.length > 0">
                 <Partneritem v-for="partner in homepage?.partners?.partners" :key="partner.id" :partner="partner" />
             </div>
             <div class="max-w-xl mx-auto grid-cols-1 place-items-center" v-else>

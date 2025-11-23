@@ -35,10 +35,10 @@
                 <p class="text-lg text-gray-700 mb-8">{{ homepage?.partners?.text }}</p>
             </div>
             <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
-                v-if="homepage?.partners?.partners.length > 0">
+                v-if="homepage?.partners?.partners && homepage.partners.partners.length > 0">
                 <Partneritem v-for="partner in homepage?.partners?.partners" :key="partner.id" :partner="partner" />
             </div>
-            <div class="max-w-xl mx-auto grid-cols-1 place-items-center" v-else>
+            <div class="max-w-xl mx-auto grid grid-cols-1 place-items-center" v-else>
                 <div
                     class="flex flex-col items-center justify-center bg-slate-50 rounded-2xl shadow transition hover:shadow-lg p-8">
                     <span class="text-xl font-semibold text-gray-800">

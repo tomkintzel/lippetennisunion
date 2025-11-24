@@ -24,7 +24,7 @@ const formatEU = (date) => {
 <template>
     <NuxtLink
         :to="event?.id ? `/events/${event.documentId}` : '#'"
-        class="p-6 bg-white shadow rounded-2xl"
+        class="p-6 bg-white shadow rounded-2xl transition hover:shadow-lg"
         :aria-disabled="!event?.id"
     >
         <img :src="useStrapiMedia(event?.poster?.url)" :alt="event.title" class="mb-4 rounded-lg w-full h-48 object-cover" v-if="event?.poster?.url" />

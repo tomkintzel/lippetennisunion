@@ -7,13 +7,12 @@
             </NuxtLink>
 
             <!-- Desktop Nav -->
+
             <nav class="hidden md:flex space-x-6 font-medium">
-                <NuxtLink to="/" class="hover:text-ltu-yellow hover:cursor-pointer">Start</NuxtLink>
-                <NuxtLink to="https://pivitsheide.tennisplatz.info/reservierung" class="hover:text-ltu-yellow hover:cursor-pointer">Hallenbuchung</NuxtLink>
-                <NuxtLink to="/news" class="hover:text-ltu-yellow hover:cursor-pointer">News</NuxtLink>
-                <NuxtLink to="/events" class="hover:text-ltu-yellow hover:cursor-pointer">Events</NuxtLink>
-                <NuxtLink to="/about" class="hover:text-ltu-yellow hover:cursor-pointer">Über uns</NuxtLink>
-                <NuxtLink to="/contact" class="hover:text-ltu-yellow hover:cursor-pointer">Kontakt</NuxtLink>
+                <NuxtLink v-for="item in menu.menuitems" :key="item.id" :to="resolveLink(item)"
+                    class="hover:text-ltu-yellow hover:cursor-pointer">
+                    {{ item.text }}
+                </NuxtLink>
             </nav>
 
             <!-- Mobile Hamburger -->
@@ -23,18 +22,13 @@
         </header>
 
 
-        <!-- Mobile Nav -->
         <transition name="fade">
             <nav v-if="mobileOpen"
                 class="md:hidden border-b border-gray-200 px-6 py-4 flex flex-col space-y-4 font-medium bg-white">
-                <NuxtLink to="/" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Start</NuxtLink>
-                <NuxtLink to="https://pivitsheide.tennisplatz.info/reservierung" @click="mobileOpen = false"
-                    class="hover:text-ltu-instagramPink">Hallenbuchung
+                <NuxtLink v-for="item in menu.menuitems" :key="item.id" :to="resolveLink(item)"
+                    @click="mobileOpen = false" class="hover:text-ltu-instagramPink">
+                    {{ item.text }}
                 </NuxtLink>
-                <NuxtLink to="/news" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">News</NuxtLink>
-                <NuxtLink to="/events" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Events</NuxtLink>
-                <NuxtLink to="/about" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Über uns</NuxtLink>
-                <NuxtLink to="/contact" @click="mobileOpen = false" class="hover:text-ltu-instagramPink">Kontakt</NuxtLink>
             </nav>
         </transition>
 
@@ -63,7 +57,30 @@
 import { ref } from 'vue'
 import { Menu } from 'lucide-vue-next'
 // setting
-const {data: settings } = await useStrapi().find('setting');
+const { data: settings } = await useStrapi().find('setting');
+const { data: menu } = await useStrapi().find('menu', {
+    populate: {
+        menuitems: {
+            populate: '*'
+        }
+    }
+})
+
+// Hilfsfunktion zum Link bauen
+const resolveLink = (item) => {
+    // Wenn externer Link
+    if (item.link) {
+        return item.link
+    }
+
+    // Wenn eine Seite verknüpft ist
+    if (item.seiten && item.seiten.slug) {
+        return `/${item.seiten.slug}`
+    }
+
+    // Fallback
+    return '#'
+}
 
 const mobileOpen = ref(false)
 // current year for footer

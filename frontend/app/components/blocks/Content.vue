@@ -111,7 +111,6 @@ const getAssetUrl = (id) => {
   color: #1f2937; /* gray-800 */
   line-height: 1.75;
   font-size: 1rem;
-  max-width: 65ch;
 }
 
 .strapi-richtext > *:first-child {

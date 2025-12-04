@@ -25,7 +25,9 @@
         "blocks.events",
         "blocks.button",
         "blocks.partners",
-        "blocks.text"
+        "blocks.text",
+        "blocks.news",
+        "blocks.content"
       ]
     }
   }

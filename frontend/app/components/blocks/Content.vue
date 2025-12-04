@@ -24,7 +24,7 @@ const getAssetUrl = (id) => {
 <template>
   <!-- ROOT WRAPPER (nur einmal) -->
   <section v-if="isRoot" class="py-16">
-    <div class="container mx-auto px-4">
+    <div class="container max-w-6xl mx-auto px-4">
       <div class="strapi-richtext">
 
         <BlocksContent

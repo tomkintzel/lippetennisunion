@@ -27,9 +27,6 @@
         "blocks.partners",
         "blocks.text"
       ]
-    },
-    "testnew": {
-      "type": "blocks"
     }
   }
 }

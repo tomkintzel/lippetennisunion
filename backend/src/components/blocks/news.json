@@ -8,6 +8,14 @@
   "attributes": {
     "title": {
       "type": "string"
+    },
+    "text": {
+      "type": "text"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post"
     }
   },
   "config": {}

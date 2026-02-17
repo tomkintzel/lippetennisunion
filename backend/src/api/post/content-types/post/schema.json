@@ -18,6 +18,15 @@
       "type": "uid",
       "targetField": "title"
     },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
     "content": {
       "type": "dynamiczone",
       "components": [

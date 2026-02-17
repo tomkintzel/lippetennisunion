@@ -9,7 +9,7 @@
             <!-- Desktop Nav -->
 
             <nav class="hidden md:flex space-x-6 font-medium">
-                <NuxtLink v-for="item in menu.menuitems" :key="item.id" :to="resolveLink(item)"
+                <NuxtLink v-for="item in menu?.menuitems" :key="item.id" :to="resolveLink(item)"
                     class="hover:text-ltu-yellow hover:cursor-pointer">
                     {{ item.text }}
                 </NuxtLink>
@@ -25,7 +25,7 @@
         <transition name="fade">
             <nav v-if="mobileOpen"
                 class="md:hidden border-b border-gray-200 px-6 py-4 flex flex-col space-y-4 font-medium bg-white">
-                <NuxtLink v-for="item in menu.menuitems" :key="item.id" :to="resolveLink(item)"
+                <NuxtLink v-for="item in menu?.menuitems" :key="item.id" :to="resolveLink(item)"
                     @click="mobileOpen = false" class="hover:text-ltu-instagramPink">
                     {{ item.text }}
                 </NuxtLink>

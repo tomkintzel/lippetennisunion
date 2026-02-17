@@ -28,6 +28,21 @@
                 </div>
             </div>
         </section>
+        <!-- News Section -->
+        <section class="px-6 py-16 bg-gray-100" v-if="homepage?.newssection">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-3xl font-bold text-center mb-4">{{ homepage.newssection.title }}</h3>
+                <p class="text-center text-gray-600 mb-12" v-if="homepage.newssection.text">{{ homepage.newssection.text }}</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" v-if="latestPosts.length > 0">
+                    <Postitem v-for="post in latestPosts" :key="post.id" :post="post" />
+                </div>
+                <div class="grid grid-cols-1 max-w-xl place-items-center mx-auto" v-else>
+                    <div class="bg-white shadow rounded-2xl p-6 mt-8 text-center">
+                        <p>Zur Zeit keine Beiträge vorhanden</p>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Partners Section -->
         <section id="partners" class="px-6 py-16 bg-white">
             <div class="max-w-4xl mx-auto text-center">
@@ -56,7 +71,13 @@
 // fetch data from strapi backend homepage site
 const { data: homepage } = await useStrapi().find('homepage', { 'pLevel': '6' });
 const imageUrl = computed(() => useStrapiMedia(homepage.hero?.image?.url || ''));
-console.log('Homepage data:', homepage);
+
+const latestPosts = computed(() => {
+    const posts = homepage?.newssection?.posts || [];
+    return [...posts]
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 3);
+});
 </script>
 
 <style>

@@ -33,6 +33,11 @@
       "type": "component",
       "component": "blocks.partners",
       "repeatable": false
+    },
+    "newssection": {
+      "type": "component",
+      "component": "blocks.news",
+      "repeatable": false
     }
   }
 }

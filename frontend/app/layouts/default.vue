@@ -57,14 +57,29 @@
 import { ref } from 'vue'
 import { Menu } from 'lucide-vue-next'
 // setting
-const { data: settings } = await useStrapi().find('setting');
-const { data: menu } = await useStrapi().find('menu', {
-    populate: {
-        menuitems: {
-            populate: '*'
-        }
+const { data: settings } = await useAsyncData('settings', async () => {
+    try {
+        const res = await useStrapi().find('setting');
+        return res?.data;
+    } catch {
+        return null;
     }
-})
+});
+
+const { data: menu } = await useAsyncData('menu', async () => {
+    try {
+        const res = await useStrapi().find('menu', {
+            populate: {
+                menuitems: {
+                    populate: '*'
+                }
+            }
+        });
+        return res?.data;
+    } catch {
+        return null;
+    }
+});
 
 // Hilfsfunktion zum Link bauen
 const resolveLink = (item) => {

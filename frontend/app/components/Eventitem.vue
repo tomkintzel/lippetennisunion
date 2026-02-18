@@ -23,7 +23,7 @@ const formatEU = (date) => {
 </script>
 <template>
     <NuxtLink
-        :to="event?.id ? `/events/${event.documentId}` : '#'"
+        :to="event?.slug ? `/events/${event.slug}` : '#'"
         class="p-6 bg-white shadow rounded-2xl transition hover:shadow-lg"
         :aria-disabled="!event?.id"
     >

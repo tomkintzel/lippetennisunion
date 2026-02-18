@@ -3,26 +3,34 @@ const route = useRoute();
 const config = useRuntimeConfig();
 
 const STRAPI_URL = config.public.strapiUrl;
-const id = route.params.id;
+const slug = route.params.slug;
 
-if (!id) {
+if (!slug) {
     throw createError({
         statusCode: 400,
-        statusMessage: "Keine ID vorhanden"
+        statusMessage: "Kein Slug vorhanden"
     });
 }
 
 const { data: item } = await useAsyncData(
-    `resource-${id}`,
+    `event-${slug}`,
     async () => {
         try {
-            const res = await $fetch(`${STRAPI_URL}/api/events/${id}?pLevel=6`, {
-                query: { pLevel: '6' }
+            const res = await $fetch(`${STRAPI_URL}/api/events`, {
+                query: {
+                    'filters[slug][$eq]': slug,
+                    pLevel: '6'
+                }
             });
 
-            return res?.data;
+            const event = res?.data?.[0];
+            if (!event) {
+                throw createError({ statusCode: 404, statusMessage: "Event nicht gefunden" });
+            }
+            return event;
         } catch (err) {
-            // ERROR WIRKLICH IMMER SICHER AUSLESEN
+            if (err.statusCode) throw err;
+
             const statusCode =
                 err?.status ||
                 err?.response?.status ||
@@ -40,11 +48,7 @@ const { data: item } = await useAsyncData(
         }
     }
 );
-console.log('Event page data:', item);
-const heroImage = computed(() =>
-    useStrapiMedia(item?.image?.url || '')
-);
-console.log('Event page image URL:', item?.image?.url);
+
 const formatEU = (date) => {
   return new Date(date).toLocaleString("de-DE", {
     timeZone: "Europe/Berlin",
@@ -53,7 +57,6 @@ const formatEU = (date) => {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit"
-    // no 'second' → no seconds displayed
   })
 }
 </script>

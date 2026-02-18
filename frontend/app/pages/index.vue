@@ -46,6 +46,9 @@
         <!-- Hallenbuchung CTA -->
         <BlocksHallenbuchung v-if="homepage?.hallenbuchung" :title="homepage.hallenbuchung.title"
             :text="homepage.hallenbuchung.text" :button="homepage.hallenbuchung.button" />
+        <!-- Instagram CTA -->
+        <BlocksInstagram v-if="homepage?.instagram" :title="homepage.instagram.title"
+            :text="homepage.instagram.text" :handle="homepage.instagram.handle" />
         <!-- Partners Section -->
         <section id="partners" class="px-6 py-16 bg-white">
             <div class="max-w-4xl mx-auto text-center">

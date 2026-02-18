@@ -43,6 +43,11 @@
       "type": "component",
       "component": "blocks.hallenbuchung",
       "repeatable": false
+    },
+    "instagram": {
+      "type": "component",
+      "component": "blocks.instagram",
+      "repeatable": false
     }
   }
 }

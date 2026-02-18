@@ -29,7 +29,8 @@
         "blocks.news",
         "blocks.content",
         "blocks.richtext",
-        "blocks.hallenbuchung"
+        "blocks.hallenbuchung",
+        "blocks.instagram"
       ]
     }
   }

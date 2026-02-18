@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_blocks_instagrams",
+  "info": {
+    "displayName": "instagram"
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    },
+    "handle": {
+      "type": "string"
+    }
+  }
+}

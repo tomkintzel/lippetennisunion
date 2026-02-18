@@ -37,7 +37,8 @@
         "blocks.events",
         "blocks.button",
         "blocks.content",
-        "blocks.richtext"
+        "blocks.richtext",
+        "blocks.instagram"
       ]
     }
   }

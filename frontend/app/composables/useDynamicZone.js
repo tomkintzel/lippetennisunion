@@ -1,5 +1,7 @@
 import { defineAsyncComponent } from 'vue';
 
+const blockModules = import.meta.glob('~/components/blocks/*.vue');
+
 export function useDynamicZone(zoneData) {
   if (!zoneData || !Array.isArray(zoneData)) return [];
 
@@ -15,10 +17,15 @@ export function useDynamicZone(zoneData) {
       .map(p => p.charAt(0).toUpperCase() + p.slice(1))
       .join('');
 
-    // Async import from components/blocks/
-    const asyncComponent = defineAsyncComponent(() =>
-      import(`~/components/${folder}/${fileName}.vue`)
-    );
+    const modulePath = `/components/${folder}/${fileName}.vue`;
+    const matchedKey = Object.keys(blockModules).find(key => key.endsWith(modulePath));
+
+    if (!matchedKey) {
+      console.warn(`Block component "${folder}/${fileName}" not found, skipping.`);
+      return null;
+    }
+
+    const asyncComponent = defineAsyncComponent(blockModules[matchedKey]);
 
     return {
       id: item.id || index,

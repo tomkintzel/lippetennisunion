@@ -27,7 +27,8 @@
         "blocks.partners",
         "blocks.text",
         "blocks.news",
-        "blocks.content"
+        "blocks.content",
+        "blocks.richtext"
       ]
     }
   }

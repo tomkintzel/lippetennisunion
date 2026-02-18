@@ -35,7 +35,9 @@
         "blocks.news",
         "blocks.hero",
         "blocks.events",
-        "blocks.button"
+        "blocks.button",
+        "blocks.content",
+        "blocks.richtext"
       ]
     }
   }

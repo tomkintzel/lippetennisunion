@@ -13,7 +13,7 @@ const props = defineProps({
             class="flex flex-col items-center justify-center bg-slate-50 rounded-2xl shadow p-8"
         >
             <img
-                :src="useStrapiMedia(partner?.logo?.url)"r
+                :src="useStrapiMedia(partner?.logo?.url)"
                 :alt="partner?.title || 'Partner Logo'"
                 class="max-h-16 object-contain"
                 v-if="partner?.logo?.url"

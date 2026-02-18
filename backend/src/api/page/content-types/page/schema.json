@@ -28,7 +28,8 @@
         "blocks.text",
         "blocks.news",
         "blocks.content",
-        "blocks.richtext"
+        "blocks.richtext",
+        "blocks.hallenbuchung"
       ]
     }
   }

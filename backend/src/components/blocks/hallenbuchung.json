@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_hallenbuchungs",
+  "info": {
+    "displayName": "hallenbuchung"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    },
+    "button": {
+      "type": "component",
+      "component": "blocks.button",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

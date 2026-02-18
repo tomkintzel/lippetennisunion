@@ -38,6 +38,11 @@
       "type": "component",
       "component": "blocks.news",
       "repeatable": false
+    },
+    "hallenbuchung": {
+      "type": "component",
+      "component": "blocks.hallenbuchung",
+      "repeatable": false
     }
   }
 }

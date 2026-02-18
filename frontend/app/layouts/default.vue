@@ -41,7 +41,7 @@
 
         <!-- Footer -->
         <footer class="w-full text-center py-8 border-t border-gray-200 text-sm">
-            <p class="font-semibold">{{ settings?.name }}</p>
+            <p class="font-semibold">{{ settings?.name }} — Entwicklung für Spieler, die mehr wollen.</p>
             <p class="text-gray-600">{{ settings?.email }}</p>
             <div class="mt-4 space-x-4">
                 <NuxtLink to="/impressum" class="text-ltu-blue hover:underline">Impressum</NuxtLink>

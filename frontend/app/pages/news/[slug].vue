@@ -3,25 +3,34 @@ const route = useRoute();
 const config = useRuntimeConfig();
 
 const STRAPI_URL = config.public.strapiUrl;
-const id = route.params.id;
+const slug = route.params.slug;
 
-if (!id) {
+if (!slug) {
     throw createError({
         statusCode: 400,
-        statusMessage: "Keine ID vorhanden"
+        statusMessage: "Kein Slug vorhanden"
     });
 }
 
 const { data: item } = await useAsyncData(
-    `post-${id}`,
+    `post-${slug}`,
     async () => {
         try {
-            const res = await $fetch(`${STRAPI_URL}/api/posts/${id}`, {
-                query: { pLevel: '6' }
+            const res = await $fetch(`${STRAPI_URL}/api/posts`, {
+                query: {
+                    'filters[slug][$eq]': slug,
+                    pLevel: '6'
+                }
             });
 
-            return res?.data;
+            const post = res?.data?.[0];
+            if (!post) {
+                throw createError({ statusCode: 404, statusMessage: "Beitrag nicht gefunden" });
+            }
+            return post;
         } catch (err) {
+            if (err.statusCode) throw err;
+
             const statusCode =
                 err?.status ||
                 err?.response?.status ||

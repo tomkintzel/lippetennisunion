@@ -13,7 +13,7 @@ const truncate = (text, length = 120) => {
 </script>
 <template>
     <NuxtLink
-        :to="post?.id ? `/news/${post.documentId}` : '#'"
+        :to="post?.slug ? `/news/${post.slug}` : '#'"
         class="p-6 bg-white shadow rounded-2xl transition hover:shadow-lg"
         :aria-disabled="!post?.id"
     >
